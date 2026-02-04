@@ -33,6 +33,21 @@
     echo "porownanie a != c to: ".$wynik."<br>";
     $wynik=($a===$c);
     echo "porownanie a === c to: ".$wynik."<br>";
+    echo "<p>paragraf</p>";
+    $e=6^7;
+    $f=22;
+    $wynik($e*$f);
+    echo "wynik e * f to: ".$wynik."<br>";
+
+    $g=true;
+    $h=false;
+    $i=true;
+    $j=false;
+    echo "<br>sponik lub (f||g) wynik: ".($f||$g);
+    echo "<br>sponik lub (f&&g) wynik: ".($f&&$g);
+
+    echo "<br>sponik lub (i||j) wynik: ".($i||$j);
+    echo "<br>sponik lub (i&&j) wynik: ".($i&&$j);
 
 
 
