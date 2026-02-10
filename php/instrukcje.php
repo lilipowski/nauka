@@ -7,7 +7,7 @@
 </head>
 <body>
     <?php 
-    $d=5;
+    $d=54;
     $e=6;
     $f="napis";
 
