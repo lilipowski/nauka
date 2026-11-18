@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacje o aktorze | KinoTEKA</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+
+    <?php
+    $polaczenie=mysqli_connect('localhost','root','','kino');
+    ?>
+    <header id="nag1">
+    <h2><a href="index1.php">KinoTEKA</a></h2>
+    </header>
+    <header id="nag2">
+    <p><i>W naszej bazie znajdują się najlepsi aktorzy</i></p>
+    </header>
+    <main>
+        <div id="aktorzy">
+            <div>
+                <img src="PLIK_AWATARA" alt="">
+            </div>
+        <?php
+    
+    if (isset($_GET['id'])) {
+        $id=$_GET['id'];
+        $zapytanie="Select imie,nazwisko,plik_awatara from aktorzy where id_aktora=".$id.";";
+        $wynik=mysqli_query($polaczenie,$zapytanie);
+        $tab=mysqli_fetch_assoc($wynik);
+        
+        echo '<img src="'.$tab['plik_awatara'].'" alt="'.$tab['imie'].' '.$tab['nazwisko'].'" title="'.$tab['imie'].' '.$tab['nazwisko'].'"> ';
+        echo "<h1>".$tab['imie']." ".$tab['nazwisko']."</h1>";
+            }
+           
+       ?>
+        </div>
+
+    <?php
+    if (isset($_GET['id'])) {
+        $id=$_GET['id'];
+        $zapytanie2="Select filmy.id_filmu,filmy.tytul,filmy.rok_produkcji from filmy join filmy_aktorzy on filmy.id_filmu=filmy_aktorzy.id_filmu where filmy_aktorzy.id_aktora=".$id.";";
+        $wynik2=mysqli_query($polaczenie,$zapytanie2);
+        $ile=mysqli_num_rows($wynik2);
+        if ($ile==0)
+        {
+        echo "<p>".$tab['imie']." nie znajduje się na listach obsady znanych nam produkcji</p>";
+        }
+        else if ($ile>0)
+        {
+        echo "<p>".$tab['imie']."  znajduje się na listach obsady ".$ile." znanych nam produkcji</p>";
+        }
+
+    }
+    ?>
+    </main>
+    <footer>
+    <p>Autor: <strong>000000000000000</strong></p>
+    </footer>
+    <?php
+    mysqli_close($polaczenie);
+    ?>
+</body>
+</html>
