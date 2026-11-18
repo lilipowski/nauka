@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista aktorów | KinoTEKA</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <?php
+    $polaczenie=mysqli_connect('localhost','root','','kino');
+    ?>
+    <header id="nag1">
+    <h2><a href="index1.php">KinoTEKA</a></h2>
+    </header>
+    <header id="nag2">
+    <p><i>W naszej bazie znajdują się najlepsi aktorzy</i></p>
+    </header>
+    <main>
+    <h1>Najlepsi aktorzy tylko w naszym kinie</h1>
+    <div id="wynik"> 
+    <?php
+    $zapytanie="Select * FROM aktorzy ORDER BY nazwisko ASC, imie ASC;";
+    $wynik=mysqli_query($polaczenie,$zapytanie);
+    $ile=mysqli_num_rows($wynik);
+    $i=0;
+    while ($i<$ile)
+    {
+    $tab=mysqli_fetch_assoc($wynik);
+    echo "<div>";
+    echo "<a href='aktor.php?id=".$tab['id_aktora']."'>";
+    echo '<img src="'.$tab['plik_awatara'].'" alt="'.$tab['imie'].' '.$tab['nazwisko'].'" title="'.$tab['imie'].' '.$tab['nazwisko'].'"> ';
+    echo "<p>".$tab['imie']." ".$tab['nazwisko']."</p>";
+    echo "</a>";
+    echo "</div>";
+    $i++;
+    }
+    ?>
+    </div>
+    </main>
+    <footer>
+    <p>Autor: <strong>000000000000000</strong></p>
+    </footer>
+    <?php
+    mysqli_close($polaczenie);
+    ?>
+</body>
+</html>
